@@ -4,8 +4,8 @@
 
 Project 1 asked to build the basic logic gates (NOT, AND, OR, XOR, MUX, DMUX, etc.) using only NAND gates. This project split for some of part.<br>
 
-1. Logic gates output of NOT = NOT A.<br>
-2. Logic gates output of AND = A and B.<br>
+1. Logic gates output of NOT = NOT A.
+2. Logic gates output of AND = A and B.
 3. Logic gates law of OR = a OR b = NOT(NOTa AND NOTb).<br>
 4. Logic gates law of XOR = (a AND NOT b) OR (NOT a AND b).<br>
 5. Logic gates of Mux (Multiplexer) = choose between a and b based on selector sel, where out = (a AND NOT sel) OR (b AND sel).<br>

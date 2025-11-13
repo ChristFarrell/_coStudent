@@ -25,5 +25,22 @@ CHIP Memory {
     OUT out[16];
 
     PARTS:
-	//// Replace this comment with your code.
+	//// Answer
+    // Decode address
+    Not(in=address[14], out=N14);
+    Not(in=address[13], out=N13);
+
+    // Load signals
+    And(a=N14, b=load, out=Mload);                  // RAM16K region (0x0000–0x3FFF)
+    And(a=address[14], b=N13, out=ScreenRegion);    // Screen region (0x4000–0x5FFF)
+    And(a=ScreenRegion, b=load, out=Sload);         // Only load if in screen region
+
+    // Components
+    RAM16K(in=in, load=Mload, address=address[0..13], out=outM);
+    Screen(in=in, load=Sload, address=address[0..12], out=outS);
+    Keyboard(out=outK);
+
+    // Output selection
+    Mux16(a=outS, b=outK, sel=address[13], out=outSK);
+    Mux16(a=outM, b=outSK, sel=address[14], out=out);
 }

@@ -9,3 +9,46 @@
 // the screen should be cleared.
 
 //// Replace this comment with your code.
+(LOOP)
+    @KBD
+    D=M
+    @BLACK
+    D;JNE        // if key pressed → go fill black
+    @WHITE
+    0;JMP        // else → go fill white
+
+(BLACK)
+    @color
+    M=-1         // black = all 1s
+    @DRAW
+    0;JMP
+
+(WHITE)
+    @color
+    M=0          // white = all 0s
+    @DRAW
+    0;JMP
+
+(DRAW)
+    @SCREEN
+    D=A
+    @addr
+    M=D          // addr = SCREEN base
+
+(LOOPDRAW)
+    @color
+    D=M
+    @addr
+    A=M
+    M=D          // set pixel = color
+    @addr
+    M=M+1        // addr++
+    @KBD
+    D=A
+    @addr
+    D=M-D
+    @LOOPDRAW
+    D;JLT        // loop until addr reaches KBD
+
+    @LOOP
+    0;JMP        // repeat forever

@@ -1,6 +1,6 @@
 # NOTES
 
-## [Homework 1]()
+## [Homework 1](https://github.com/ChristFarrell/_coStudent/tree/main/homework/1)
 
 On the project 1, we asked to build the basic logic gates (NOT, AND, OR, XOR, MUX, DMUX, etc.) using only NAND gates. This project split for some of part.<br>
 
@@ -15,7 +15,7 @@ For the (NOT16, AND16, OR16, XOR16, MUX16, DMUX16), the concept itself still sam
 
 For the Mux4Way16 and Mux8Way16, use multiple Mux16 chips to choose among 4 or 8 16-bit inputs. Last for DMux4Way, DMux8Way: expand DMux logic to 4 or 8 outputs using two or three levels.<br>
 
-## [Homework 2]()
+## [Homework 2](https://github.com/ChristFarrell/_coStudent/tree/main/homework/2)
 
 On the project 2, we asked to build circuits that can perform binary addition and basic arithmetic operations. There are 5 projects inside (A 16-bit Adder, A Full Adder, A Half Adder, A 16-bit Incrementer, ALU).<br>
 
@@ -37,7 +37,7 @@ Third, we have optional choosing between output negation. The Mux16 chooses if n
 
 The last one is zero flag, where it split for some part checking. o1 = 1 if any bit 0–7 is 1, o2 = 1 if any bit 8–15 is 1, o3 = 1 if any bit in the 16-bit output is nonzero, If none of the bits were 1 → zr=1 (output is zero).<br>
 
-## [Homework 3]()
+## [Homework 3](https://github.com/ChristFarrell/_coStudent/tree/main/homework/3)
 
 On the project 3, we already build the combinational logic and now we will let adding of memory — circuits that store data between clock cycles. There are 8 projects inside (Bit, Register, RAM8, RAM64, RAM512, RAM4K, RAM16K, PC).<br>
 
@@ -57,7 +57,7 @@ For RAM16K, it contains 64 registers (8 x RAM4K), that needs a 14-bit address. A
 
 For PC(Program Counter), It first increments if inc=1, or loads a new address if load=1, or resets to 0 if reset=1. Otherwise keeps current value<br>
 
-## [Homework 4]()
+## [Homework 4](https://github.com/ChristFarrell/_coStudent/tree/main/homework/4)
 
 On the project 4, we starting moving from hardware to the software. On this project, we will learn the Hack Machine Language, by writing .asm programs.<br>
 
@@ -69,7 +69,7 @@ For mult.asm, we multiplies two numbers stored in RAM[0] and RAM[1], and puts th
 
 For example: RAM[0] = 3 ; RAM[1] = 4 ; RAM[2] = 12 (result) ; RAM[3] = Loop counter (decrements each time). This project works only for non-negative integers and work slow on big number.<br>
 
-## [Homework 5]()
+## [Homework 5](https://github.com/ChristFarrell/_coStudent/tree/main/homework/5)
 
 On the project 5, after built from logic gates → ALU → registers → memory, we can connects to form the Hack Computer.<br>
 

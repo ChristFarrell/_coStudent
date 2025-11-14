@@ -112,8 +112,8 @@ Last, these multiplexers decide which component’s output should appear on the 
 For Computer Project, the computer chip ties everything togeter, contain of CPU, Memory (RAM + Screen + Keyboard), and ROM. The execution will start like this:
 1. CPU fetches instruction from ROM[PC].
 2. CPU executes:
-    - If A-instruction = updates A.
-    - If C-instruction = performs computation, writes to RAM, or jumps.
+   - If A-instruction = updates A.
+   - If C-instruction = performs computation, writes to RAM, or jumps.
 3. Memory responds to load or address signals.
 4. PC updates (either +1 or jump).
 5. Repeat until reset or halt.

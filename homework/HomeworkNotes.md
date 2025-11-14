@@ -83,16 +83,16 @@ Third, the ALU performs computation. X = D and Y = A or M. The outpus will be ou
 
 In short, 
 1. If it’s an A-instruction
-   - Loads the A register with the specified value.
+    - Loads the A register with the specified value.
 
 2. If it’s a C-instruction
-   - Performs the ALU computation using D and A/M.
-   - Updates A, D, or Memory if dest bits are set.
-   - If the jump condition is true, loads A into PC (jumps).
+    - Performs the ALU computation using D and A/M.
+    - Updates A, D, or Memory if dest bits are set.
+    - If the jump condition is true, loads A into PC (jumps).
 
 3. Program Counter (PC) behavior
-   - Automatically increments after each instruction.
-   - Jumps when a valid jump condition is satisfied.
+    - Automatically increments after each instruction.
+    - Jumps when a valid jump condition is satisfied.
 
 For Memory project, it's defines the entire addressable memory system of the Hack computer. It connects three physical devices — RAM, Screen, and Keyboard — into one unified interface that the CPU can use.<br>
 
@@ -102,12 +102,12 @@ Second, it goes to load signals and the components.From components, it result of
 
 Last, these multiplexers decide which component’s output should appear on the overall out bus.
 1. Mux16(a=outS, b=outK, sel=address[13])
-   - If address[13] = 0, output from Screen.
-   - If address[13] = 1, output from Keyboard, result is outSK.
+    - If address[13] = 0, output from Screen.
+    - If address[13] = 1, output from Keyboard, result is outSK.
 
 2. Mux16(a=outM, b=outSK, sel=address[14])
-   - If address[14] = 0, output from RAM16K.
-   - If address[14] = 1, output from either Screen or Keyboard (based on previous Mux), final result = out.
+    - If address[14] = 0, output from RAM16K.
+    - If address[14] = 1, output from either Screen or Keyboard (based on previous Mux), final result = out.
 
 For Computer Project, the computer chip ties everything togeter, contain of CPU, Memory (RAM + Screen + Keyboard), and ROM. The execution will start like this:
 1. CPU fetches instruction from ROM[PC].

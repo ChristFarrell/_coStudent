@@ -86,7 +86,7 @@ In short,
    - Loads the A register with the specified value.
 
 2. If it’s a C-instruction
-   - Performs the ALU computation using D and A/M.
+- Performs the ALU computation using D and A/M.
    - Updates A, D, or Memory if dest bits are set.
    - If the jump condition is true, loads A into PC (jumps).
 

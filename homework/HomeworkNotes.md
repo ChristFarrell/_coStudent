@@ -102,8 +102,8 @@ Second, it goes to load signals and the components.From components, it result of
 
 Last, these multiplexers decide which component’s output should appear on the overall out bus.
 1. Mux16(a=outS, b=outK, sel=address[13])
-    - If address[13] = 0, output from Screen.
-    - If address[13] = 1, output from Keyboard, result is outSK.
+   - If address[13] = 0, output from Screen.
+   - If address[13] = 1, output from Keyboard, result is outSK.
 
 2. Mux16(a=outM, b=outSK, sel=address[14])
     - If address[14] = 0, output from RAM16K.

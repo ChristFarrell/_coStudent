@@ -79,8 +79,7 @@ For `Mult.asm` multiplies two numbers stored in RAM[0] and RAM[1], and stores th
 
 3. Setup the Loop Counter
    - Take the first number: `RAM[0]`  
-   - Copy it to `RAM[3]`
-   `RAM[3]` acts as our oop counter. It tells us how many times we must add `RAM[1]` to the product.
+   - Copy it to `RAM[3]`. `RAM[3]` acts as our oop counter. It tells us how many times we must add `RAM[1]` to the product.
 
 4. Main Loop
    Inside the loop:
@@ -90,8 +89,7 @@ For `Mult.asm` multiplies two numbers stored in RAM[0] and RAM[1], and stores th
 
 5. Repeat Until Counter Reaches Zero
    - Continue looping until `RAM[3] == 0`
-   - When the counter becomes zero, all additions have been completed
-   The value in `RAM[2]` is now the final product.
+   - When the counter becomes zero, all additions have been completed. The value in `RAM[2]` is now the final product.
 
 6. End of Program
    Execution stops at the `END` label.

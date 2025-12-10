@@ -33,9 +33,26 @@ At first, preprocess inputs, where Mux16 selects between original input(a=x or a
 
 Second, we compute the main operation (AND or ADD). The Mux16 chooses if f=0, then (aAndB). If f=1, then (aPlusB)<br>
 
-Third, we have optional choosing between output negation. The Mux16 chooses if no=0, then it's original. If no=1, then it's negated output.<br> 
+Third, we have optional choosing between output negation. The ALU produces out0 and its negated version, nout0. The Mux16 chooses one of the following:
+- no = 0 → output = out0 (original)
+- no = 1 → output = nout0 (inverted/NOT)
 
-The last one is zero flag, where it split for some part checking. o1 = 1 if any bit 0–7 is 1, o2 = 1 if any bit 8–15 is 1, o3 = 1 if any bit in the 16-bit output is nonzero, If none of the bits were 1 → zr=1 (output is zero).<br>
+Last is Zero Flag (zr). zr = 1 only if all 16 output bits = 0. Meanwhile, zr = 0 if there is at least 1 bit that is worth 1. The output is divided into two groups of 8 bits. 
+1. The output is divided in two:
+   - outflag1 = bits 0–7
+   - outflag2 = bits 8–15
+
+2. Or8Way:
+   - o1 = 1 if there is a 1 bit in (0–7).
+   - o2 = 1 if there is a 1 bit in (8–15).
+
+3. Combine:
+   - o3 = o1 OR o2
+   - Then if there is even one 1 bit in all outputs → o3 = 1. If there are no 1 bits at all → o3 = 0
+
+4. Invert:
+   - zr = NOT o3
+   - So If o3 = 0 (all bits = 0) → zr = 1. If o3 = 1 (there is a 1 bit) → zr = 0
 
 ## [Homework 3](https://github.com/ChristFarrell/_coStudent/tree/main/homework/3)
 
@@ -53,7 +70,7 @@ For RAM512, it contains 512 registers (8 x RAM64), that needs a 9-bit address. W
 
 For RAM4K, it contains 4096 registers (8 x RAM512), that needs a 12-bit address. Still same, let DMux8Way to select which register gets loaded, and Mux8Way16 to read one output.<br>
 
-For RAM16K, it contains 64 registers (8 x RAM4K), that needs a 14-bit address. Also, let DMux8Way to select which register gets loaded, and Mux8Way16 to read one output.<br>
+For RAM16K, it contains 16.384 registers (8 x RAM4K), that needs a 14-bit address. Also, let DMux8Way to select which register gets loaded, and Mux8Way16 to read one output.<br>
 
 For PC(Program Counter), It first increments if inc=1, or loads a new address if load=1, or resets to 0 if reset=1. Otherwise keeps current value<br>
 

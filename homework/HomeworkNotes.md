@@ -82,10 +82,7 @@ For `Mult.asm` multiplies two numbers stored in RAM[0] and RAM[1], and stores th
    - Copy it to `RAM[3]`. `RAM[3]` acts as our oop counter. It tells us how many times we must add `RAM[1]` to the product.
 
 4. Main Loop
-   Inside the loop:
-   a. Add `RAM[1]` to the current product stored in `RAM[2]`. This simulates **repeated addition**.
-   b. Decrement the counter:  
-      `RAM[3] = RAM[3] - 1`
+   Inside the loop, Add `RAM[1]` to the current product stored in `RAM[2]`. This simulates **repeated addition**. After that Decrement the counter: `RAM[3] = RAM[3] - 1`
 
 5. Repeat Until Counter Reaches Zero
    - Continue looping until `RAM[3] == 0`

@@ -65,9 +65,38 @@ For Fill.asm, we continously check if a key is pressed. If pressed, fill the ent
 
 At first we make main loop that checking the keyboard. @KBD is memory address 24576 — this special address stores the keyboard state. After that, we make system that if key pressed, it fill black. If no key, it fill white. After the system, we make the drawing loop. At the end once finished filling the screen, go back to (LOOP) to check keyboard again.<br>
 
-For mult.asm, we multiplies two numbers stored in RAM[0] and RAM[1], and puts the product in RAM[2]. At first, we set RAM[2] = RAM[2] + RAM[0]. Next, we check if RAM[0] and RAM[1] is zero, then it's skip to END. After that there are setup loop counter. So, RAM[0] = first number (x) and RAM[3] = counter = x. Each loop iteration will add RAM[1] to the product (RAM[2]) and decrease the counter (RAM[3]). Let it repeat until the counter hits 0.<br>
+For `Mult.asm` multiplies two numbers stored in RAM[0] and RAM[1], and stores the final product in RAM[2]. Since the Hack computer has no multiplication instruction, the program performs multiplication using repeated addition.
 
-For example: RAM[0] = 3 ; RAM[1] = 4 ; RAM[2] = 12 (result) ; RAM[3] = Loop counter (decrements each time). This project works only for non-negative integers and work slow on big number.<br>
+1. Initialization
+   We begin by clearing the product:
+   - Set `RAM[2] = 0` This ensures the result starts from zero before we begin adding.
+
+2. Zero Check
+   Before entering the loop, the program checks:
+   - If `RAM[0] == 0` **or**
+   - If `RAM[1] == 0`
+   then the result must be **0**, so the program immediately jumps to the `END` label. This avoids unnecessary looping.
+
+3. Setup the Loop Counter
+   - Take the first number: `RAM[0]`  
+   - Copy it to `RAM[3]`
+   `RAM[3]` acts as our oop counter. It tells us how many times we must add `RAM[1]` to the product.
+
+4. Main Loop
+   Inside the loop:
+   a. Add `RAM[1]` to the current product stored in `RAM[2]`.  
+      → This simulates **repeated addition**.
+   b. Decrement the counter:  
+      `RAM[3] = RAM[3] - 1`
+
+5. Repeat Until Counter Reaches Zero
+   - Continue looping until `RAM[3] == 0`
+   - When the counter becomes zero, all additions have been completed
+   The value in `RAM[2]` is now the final product.
+
+6. End of Program
+   Execution stops at the `END` label.
+   The result remains stored in: RAM[2] = RAM[0] × RAM[1]. This program works correctly for non-negative integers, but becomes slow for large numbers because it relies on repeated addition.<br>
 
 ## [Homework 5](https://github.com/ChristFarrell/_coStudent/tree/main/homework/5)
 

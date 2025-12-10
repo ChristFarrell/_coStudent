@@ -33,36 +33,70 @@ CHIP CPU {
 
     PARTS:
 	//// Answer
-    Not(in=instruction[15],out=ni);
-	Mux16(a=outtM,b=instruction,sel=ni,out=i);
+    Not(in=instruction[15],out=ni);               // ni = 1 bila A-instruction (bit 15 = 0)
 
-	Or(a=ni,b=instruction[5],out=intoA);
-	ARegister(in=i,load=intoA,out=A,out[0..14]=addressM);
+	// Bila A-instruction → gunakan 'outtM' (hasil ALU sebelumnya, tapi aman karena load=0)
+	// Bila C-instruction → gunakan 'instruction' (agar A-register bisa ambil constant? Tidak, tetap A-instruction yg load)
+	Mux16(a=outtM,b=instruction,sel=ni,out=i);   // i = nilai untuk A-register
 
-	And(a=instruction[15],b=instruction[12],out=AorM);
-	Mux16(a=A,b=inM,sel=AorM,out=AM);
-	
-	ALU(x=D,y=AM,zx=instruction[11],nx=instruction[10],zy=instruction[9],ny=instruction[8],f=instruction[7],no=instruction[6],out=outtM,out=outM,zr=zr,ng=ng);
+	// ------ A REGISTER ------
+	Or(a=ni,b=instruction[5],out=intoA);         // load A bila A-instruction atau bila C-instr punya dest ke A (a-bit=instruction[5])
+	ARegister(in=i,load=intoA,out=A,out[0..14]=addressM);   // simpan nilai ke A-register
 
-	And(a=instruction[15],b=instruction[4],out=intoD);
+	// ------ SELECT INPUT FOR ALU: A or M ------
+	And(a=instruction[15],b=instruction[12],out=AorM);  // sel = 1 bila C-instruction & a-bit=1 → pakai M
+	Mux16(a=A,b=inM,sel=AorM,out=AM);             // AM = nilai untuk ALU.y (A-register atau M[address])
+
+	// ------ ALU ------
+	ALU(
+    	x=D,                   // x = D-register
+    	y=AM,                  // y = A atau M
+    	zx=instruction[11],    // control bits
+    	nx=instruction[10],
+    	zy=instruction[9],
+    	ny=instruction[8],
+    	f=instruction[7],
+    	no=instruction[6],
+    	out=outtM,             // hasil ALU
+    	out=outM,              // output ke Memory.outM
+    	zr=zr,                 // zero flag
+    	ng=ng                  // negative flag
+	);
+
+	// ------ D REGISTER ------
+	And(a=instruction[15],b=instruction[4],out=intoD);   // load D bila C-instruction & dest D=1
 	DRegister(in=outtM,load=intoD,out=D);
 
-	And(a=instruction[15],b=instruction[3],out=writeM);
+	// ------ WRITE TO MEMORY ------
+	And(a=instruction[15],b=instruction[3],out=writeM);  // writeM bila C-instruction & dest M=1
 
-	Not(in=ng,out=pos);
-	Not(in=zr,out=nzr);
-	And(a=instruction[15],b=instruction[0],out=jgt);
-	And(a=pos,b=nzr,out=posnzr);
-	And(a=jgt,b=posnzr,out=ld1);
+	// ------ JUMP LOGIC (j1 j2 j3 bits) ------
 
-	And(a=instruction[15],b=instruction[1],out=jeq);
-	And(a=jeq,b=zr,out=ld2);
+	// j1 (JGT)
+	Not(in=ng,out=pos);             // pos = NOT negative flag
+	Not(in=zr,out=nzr);             // nzr = NOT zero flag
+	And(a=instruction[15],b=instruction[0],out=jgt);     // jgt bit = j1
+	And(a=pos,b=nzr,out=posnzr);    // positive non-zero
+	And(a=jgt,b=posnzr,out=ld1);    // load PC bila JGT terpenuhi
 
-	And(a=instruction[15],b=instruction[2],out=jlt);
-	And(a=jlt,b=ng,out=ld3);
+	// j2 (JEQ)
+	And(a=instruction[15],b=instruction[1],out=jeq);     // jeq bit = j2
+	And(a=jeq,b=zr,out=ld2);        // bila equal (zr = 1) → jump
 
-	Or(a=ld1,b=ld2,out=ldt);
-	Or(a=ld3,b=ldt,out=ld);
+	// j3 (JLT)
+	And(a=instruction[15],b=instruction[2],out=jlt);     // jlt bit = j3
+	And(a=jlt,b=ng,out=ld3);        // bila negative → jump
 
-	PC(in=A,load=ld,inc=true,reset=reset,out[0..14]=pc);
+	// Combine all jump signals
+	Or(a=ld1,b=ld2,out=ldt);        // jgt OR jeq
+	Or(a=ld3,b=ldt,out=ld);         // jlt OR (jgt/jeq)
+
+	// ------ PROGRAM COUNTER ------
+	PC(
+    	in=A,               // lompat ke alamat A
+    	load=ld,            // load bila jump terpenuhi
+    	inc=true,           // selalu increment bila tidak jump
+    	reset=reset,
+    	out[0..14]=pc
+	);
 }

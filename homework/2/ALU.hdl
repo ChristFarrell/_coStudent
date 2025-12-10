@@ -42,27 +42,39 @@ CHIP ALU {
 
     PARTS:
     //// Answer
-    Mux16(a=x, b=false, sel=zx, out=x1);
-    Mux16(a=y, b=false, sel=zy, out=y1);
-    
-    Not16(in=x1, out=nx1);
-    Mux16(a=x1, b=nx1, sel=nx, out=x2);
-    Not16(in=y1, out=ny1);
-    Mux16(a=y1, b=ny1, sel=ny, out=y2);
+     // === 1. Proses X ===
+    Mux16(a=x, b=false, sel=zx, out=x1);  // Jika zx=1 → pakai 0; jika zx=0 → pakai x
+    Not16(in=x1, out=nx1);                // nx1 = NOT x1
+    Mux16(a=x1, b=nx1, sel=nx, out=x2);   // Jika nx=1 → gunakan NOT x; jika 0 → x biasa
 
-    And16(a=x2, b=y2, out=aAndB);
-    Add16(a=x2, b=y2, out=aPlusB);
+    // === 2. Proses Y ===
+    Mux16(a=y, b=false, sel=zy, out=y1);  // Jika zy=1 → y jadi 0
+    Not16(in=y1, out=ny1);                // ny1 = NOT y1
+    Mux16(a=y1, b=ny1, sel=ny, out=y2);   // Jika ny=1 → gunakan NOT y; jika 0 → y biasa
+
+    // === 3. Pilih operasi ALU utama ===
+    And16(a=x2, b=y2, out=aAndB);        // Operasi AND
+    Add16(a=x2, b=y2, out=aPlusB);       // Operasi penjumlahan
     Mux16(a=aAndB, b=aPlusB, sel=f, out=out0);
+    // Jika f=1 → pilih x+y
+    // Jika f=0 → pilih x&y
 
-    Not16(in=out0, out=nout0);
+    // === 4. Optional NOT hasil ===
+    Not16(in=out0, out=nout0);           // nout0 = NOT out0
+
     Mux16(a=out0, b=nout0, sel=no, out=out,
                                    out=outflag,
                                    out[0..7]=outflag1,
                                    out[8..15]=outflag2,
                                    out[15]=ng);
+    // Jika no=1 → out = NOT hasil
+    // Sekaligus:
+    // out[15] langsung dikirim ke 'ng' (bit sign)
+    // outflag dipakai untuk cek zero
 
-    Or8Way(in=outflag1, out=o1); //Zero flag
-    Or8Way(in=outflag2, out=o2);
-    Or(a=o1, b=o2, out=o3);
-    Not(in=o3, out=zr);
+    // === 5. Hitung Zero Flag (zr) ===
+    Or8Way(in=outflag1, out=o1);   // OR semua 8 bit pertama
+    Or8Way(in=outflag2, out=o2);   // OR semua 8 bit kedua
+    Or(a=o1, b=o2, out=o3);        // OR hasil dua kelompok
+    Not(in=o3, out=zr);            // Jika semua bit 0 → zr=1
 }

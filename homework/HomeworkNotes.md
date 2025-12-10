@@ -84,8 +84,7 @@ For `Mult.asm` multiplies two numbers stored in RAM[0] and RAM[1], and stores th
 
 4. Main Loop
    Inside the loop:
-   a. Add `RAM[1]` to the current product stored in `RAM[2]`.  
-      → This simulates **repeated addition**.
+   a. Add `RAM[1]` to the current product stored in `RAM[2]`. This simulates **repeated addition**.
    b. Decrement the counter:  
       `RAM[3] = RAM[3] - 1`
 

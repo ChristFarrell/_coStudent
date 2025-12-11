@@ -58,26 +58,35 @@ jump_table = {
 def assemble(filename):
     global next_var_addr
     next_var_addr = 16
+    symbol_table = {
+        "SP": 0, "LCL": 1, "ARG": 2, "THIS": 3, "THAT": 4,
+        "SCREEN": 16384, "KBD": 24576,
+        **{f"R{i}": i for i in range(16)}
+    }
 
+    # --- Load and clean lines ---
     with open(filename, "r") as f:
-        lines = [trim(line) for line in f if trim(line)]
+        raw_lines = [trim(line) for line in f]
 
-    # --- First pass: record labels ---
+    # --- First pass: remove labels, record addresses ---
     rom_addr = 0
-    for line in lines:
+    instructions = []
+
+    for line in raw_lines:
+        if not line:
+            continue
         if line.startswith("(") and line.endswith(")"):
             label = line[1:-1]
             symbol_table[label] = rom_addr
         else:
+            instructions.append(line)
             rom_addr += 1
 
-    # --- Second pass: translate ---
+    # --- Second pass: translate instructions ---
     output = []
-    for line in lines:
-        if line.startswith("("):  # skip label declarations
-            continue
+    for line in instructions:
 
-        # --- A-instruction ---
+        # A-instruction
         if line.startswith("@"):
             symbol = line[1:]
             if symbol.isdigit():
@@ -88,25 +97,28 @@ def assemble(filename):
                     next_var_addr += 1
                 addr = symbol_table[symbol]
             output.append("0" + to_binary(addr))
+            continue
 
-        # --- C-instruction ---
-        else:
-            dest, comp, jump = "", line, ""
-            if "=" in line:
-                dest, comp = line.split("=")
-            if ";" in comp:
-                comp, jump = comp.split(";")
-            comp, dest, jump = comp.strip(), dest.strip(), jump.strip()
+        # C-instruction
+        dest, comp, jump = "", line, ""
+        if "=" in line:
+            dest, comp = line.split("=")
+        if ";" in comp:
+            comp, jump = comp.split(";")
 
-            output.append("111" + comp_table[comp] + dest_table[dest] + jump_table[jump])
+        output.append(
+            "111" +
+            comp_table[comp.strip()] +
+            dest_table[dest.strip()] +
+            jump_table[jump.strip()]
+        )
 
-    # --- Write output ---
+    # --- Write file ---
     outname = filename.replace(".asm", ".hack")
     with open(outname, "w") as f:
-        f.write("\n".join(output) + "\n")
+        f.write("\n".join(output))
 
     print(f"Finish! Output written to {outname}")
-
 
 # ========== ENTRY POINT ==========
 if __name__ == "__main__":

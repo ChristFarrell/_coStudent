@@ -1,5 +1,16 @@
 # NOTES
 
+Some part in project 1 was written by myself, but starting project 2 - 5, I asked AI and some references to help me write the homework for all of this project. Here is all of references: (Very sorry if this references might not full, since some of code already disappear/combined with other chat/not saved).
+References:
+- Project 2
+   - https://youtu.be/KT7mukuxKCE?si=bMEu5xVR92GOctpL
+   - https://youtu.be/Vtcm1oSSI0o?si=mmIOKV5etnVX1yUP
+   - https://chatgpt.com/share/6943697f-b220-8008-9592-e1f9ea76b11d
+- Project 3
+   - https://youtu.be/RF34oaChIGY?si=u3vRN5SDo_YTkt9h
+   - https://chatgpt.com/share/694369b5-9cd8-8008-acb0-589fc0dfbbf4
+- Project 4 and 5: https://chatgpt.com/share/69436246-6d0c-8008-a129-1303e88a108e
+
 ## [Homework 1](https://github.com/ChristFarrell/_coStudent/tree/main/homework/1)
 
 On the project 1, we asked to build the basic logic gates (NOT, AND, OR, XOR, MUX, DMUX, etc.) using only NAND gates. This project split for some of part.<br>

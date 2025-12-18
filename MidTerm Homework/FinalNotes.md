@@ -1,6 +1,6 @@
 # NOTES
 
-All of this project 6-12, I asked AI for 90% to help me write the homework for all of this project. Here is all of references: (Very sorry if this references might not full explain this project, since some of code already disappear/combined with other chat/not saved).
+All of this project 6-12, I asked AI for 90% to help me write the homework for all of this project. Here is all of references: (Very sorry if this references might not full, since some of code already disappear/combined with other chat/not saved).
 References
 - Explanation program 11 & Understanding from chapter 6-12 : https://chatgpt.com/share/694360d4-7e50-8008-ad36-e38569825cac
 - Explanation from chapter 1-8 : https://chatgpt.com/share/69436246-6d0c-8008-a129-1303e88a108e

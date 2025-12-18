@@ -2,10 +2,10 @@
 
 All of this project 6-12, I asked AI for 90% to help me write the homework for all of this project. Here is all of references: (Very sorry if this references might not full, since some of code already disappear/combined with other chat/not saved).
 References
-- Explanation program 11 & Understanding from chapter 6-12 : https://chatgpt.com/share/694360d4-7e50-8008-ad36-e38569825cac
 - Explanation from chapter 1-8 : https://chatgpt.com/share/69436246-6d0c-8008-a129-1303e88a108e
 - Explanation from chapter 8 and a bit 12 : https://aistudio.google.com/app/prompts?state=%7B%22ids%22%3A%5B%221jZp1vEJZl074_cbwJObYXvjrOwP_zMbe%22%5D%2C%22action%22%3A%22open%22%2C%22userId%22%3A%22100059528919497194278%22%2C%22resourceKeys%22%3A%7B%7D%7D&usp=drive_link
 - More explanation from chapter 8 : https://drive.google.com/file/d/1RGPoIr9DHZUc98ulOMPv4Q_KV1TqDiRz/view?usp=sharing
+- Explanation from chapter 11 & Understanding from chapter 6-12 : https://chatgpt.com/share/694360d4-7e50-8008-ad36-e38569825cac
 - Chapter 12 : https://github.com/havivha/Nand2Tetris/tree/master/12
 
 Presentation: https://www.canva.com/design/DAG5VdKRvfQ/Q2LYzbU7jgEPg035Ui2a1Q/edit

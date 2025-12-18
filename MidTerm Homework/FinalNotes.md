@@ -8,6 +8,8 @@ References
 - More explanation from chapter 8 : https://drive.google.com/file/d/1RGPoIr9DHZUc98ulOMPv4Q_KV1TqDiRz/view?usp=sharing
 - Chapter 12 : https://github.com/havivha/Nand2Tetris/tree/master/12
 
+Presentation: https://www.canva.com/design/DAG5VdKRvfQ/Q2LYzbU7jgEPg035Ui2a1Q/edit
+
 ## [Homework 6](https://github.com/ChristFarrell/_coStudent/tree/main/MidTerm%20Homework/6)
 
 On the project 6, this contain of 4 file, which is ADD, MAX, RECT, and PONG. Our main project is to test (.asm) in the CPU Emulator and the results will be loaded in the form of a file (.hack). On prorgram python, it will:<br>

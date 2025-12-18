@@ -26,6 +26,10 @@ For the (NOT16, AND16, OR16, XOR16, MUX16, DMUX16), the concept itself still sam
 
 For the Mux4Way16 and Mux8Way16, use multiple Mux16 chips to choose among 4 or 8 16-bit inputs. Last for DMux4Way, DMux8Way: expand DMux logic to 4 or 8 outputs using two or three levels.<br>
 
+This is the diagram of boolean for chapter 1.
+- https://github.com/ChristFarrell/_coStudent/blob/main/homework/ch1(a).jpg
+- https://github.com/ChristFarrell/_coStudent/blob/main/homework/ch1(b).jpg
+
 ## [Homework 2](https://github.com/ChristFarrell/_coStudent/tree/main/homework/2)
 
 On the project 2, we asked to build circuits that can perform binary addition and basic arithmetic operations. There are 5 projects inside (A 16-bit Adder, A Full Adder, A Half Adder, A 16-bit Incrementer, ALU).<br>
@@ -73,15 +77,12 @@ For Bit, we stores 1 bit of data (0 or 1). If load=0, Mux passes out back into i
 
 For Register, we stores a 16-bit value. Each Bit is independent but shares the same load.<br>
 
-For RAM8, it contains 8 registers (Each 16 bits), that needs a 3-bit address to select the register. Let DMux8Way to select which register gets loaded, and Mux8Way16 to read one output.<br>
-
-For RAM64, it contains 64 registers (8 groups of RAM8), that needs a 6-bit address. Same like before, let DMux8Way to select which register gets loaded, and Mux8Way16 to read one output.<br>
-
-For RAM512, it contains 512 registers (8 x RAM64), that needs a 9-bit address. We also let DMux8Way to select which register gets loaded, and Mux8Way16 to read one output.<br>
-
-For RAM4K, it contains 4096 registers (8 x RAM512), that needs a 12-bit address. Still same, let DMux8Way to select which register gets loaded, and Mux8Way16 to read one output.<br>
-
-For RAM16K, it contains 16.384 registers (8 x RAM4K), that needs a 14-bit address. Also, let DMux8Way to select which register gets loaded, and Mux8Way16 to read one output.<br>
+On this RAM part, we let DMux8Way to select which register gets loaded, and Mux8Way16 to read one output.
+1. For RAM8, it contains 8 registers (Each 16 bits), that needs a 3-bit address.
+2. For RAM64, it contains 64 registers (8 groups of RAM8), that needs a 6-bit address.
+3. For RAM512, it contains 512 registers (8 x RAM64), that needs a 9-bit address. 
+4. For RAM4K, it contains 4096 registers (8 x RAM512), that needs a 12-bit address.
+5. For RAM16K, it contains 16.384 registers (8 x RAM4K), that needs a 14-bit address. 
 
 For PC(Program Counter), It first increments if inc=1, or loads a new address if load=1, or resets to 0 if reset=1. Otherwise keeps current value<br>
 
